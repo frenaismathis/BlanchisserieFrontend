@@ -7,13 +7,14 @@ import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FloatLabelModule } from 'primeng/floatlabel';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
-  imports: [InputTextModule, ButtonModule, CardModule, FormsModule]
+  imports: [InputTextModule, ButtonModule, CardModule, FormsModule, FloatLabelModule]
 })
 export class Login {
 
@@ -31,7 +32,7 @@ export class Login {
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
         console.log('Logged in successfully');
-        this.router.navigateByUrl('/');
+        this.router.navigateByUrl('/catalog');
       },
       error: (error: HttpErrorResponse) => {
         console.error('Login failed', error);
