@@ -7,8 +7,8 @@ import { authGuard } from './services/auth-guard';
 
 export const routes: Routes = [
   { path: 'login', component: Login },
-  { path: 'catalog', component: Catalog, canActivate: [authGuard], data: { role: 'User' } },
-  { path: 'cart', component: Cart, canActivate: [authGuard], data: { role: 'User' } },
+  { path: 'catalog', component: Catalog, canActivate: [authGuard] },
+  { path: 'cart', component: Cart, canActivate: [authGuard] },
   { path: 'admin/orders', component: AdminOrders, canActivate: [authGuard], data: { role: 'Admin' } },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: '**', redirectTo: '/login' }
