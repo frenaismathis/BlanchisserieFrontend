@@ -51,21 +51,4 @@ export class Catalog implements OnInit {
     );
     return articlesMap.get(articleId) ?? null;
   }
-
-  /*updateClientOrderArticle(article: Article) {
-    const quantity = this.quantities[article.id] || 0;
-    const idx = this.clientOrderArticles.findIndex(a => a.articleId === article.id);
-    if (quantity > 0) {
-      if (idx === -1) {
-        this.clientOrderArticles.push({ clientOrderId: 0, articleId: article.id, quantity });
-      } else {
-        this.clientOrderArticles[idx].quantity = quantity;
-      }
-    } else {
-      if (idx !== -1) {
-        this.clientOrderArticles.splice(idx, 1);
-      }
-    }
-    console.log(this.clientOrderArticles);
-  }*/
 }

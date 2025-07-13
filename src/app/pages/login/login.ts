@@ -15,10 +15,10 @@ import { FloatLabelModule } from 'primeng/floatlabel';
   standalone: true,
   imports: [
     InputTextModule,
+    FloatLabelModule,
     ButtonModule,
     CardModule,
-    FormsModule,
-    FloatLabelModule,
+    FormsModule
   ],
 })
 export class Login implements OnInit {
