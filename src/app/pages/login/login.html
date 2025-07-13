@@ -1,6 +1,6 @@
 <p-button label="Toggle Dark Mode" (onClick)="toggleDarkMode()"/>
 <p-card header="Connexion" class="col-3 text-center">
-  <form (ngSubmit)="onSubmit()" class="p-fluid">
+  <form (ngSubmit)="onSubmit()" class="flex flex-column align-items-center">
     <p-floatlabel variant="in" class="inline-flex mt-2">
       <input id="email" pInputText [(ngModel)]="email" name="email" required autocomplete="email"/>
       <label for="email">Email</label>

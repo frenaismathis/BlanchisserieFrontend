@@ -1,5 +1,4 @@
-
-import { Component, signal, inject } from '@angular/core';
+import { Component, signal, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth';
 import { InputTextModule } from 'primeng/inputtext';
@@ -14,10 +13,15 @@ import { FloatLabelModule } from 'primeng/floatlabel';
   templateUrl: './login.html',
   styleUrl: './login.css',
   standalone: true,
-  imports: [InputTextModule, ButtonModule, CardModule, FormsModule, FloatLabelModule]
+  imports: [
+    InputTextModule,
+    ButtonModule,
+    CardModule,
+    FormsModule,
+    FloatLabelModule,
+  ],
 })
-export class Login {
-
+export class Login implements OnInit {
   email = '';
   password = '';
   showPassword = signal(false);
@@ -28,6 +32,13 @@ export class Login {
   loading = this.authService.loading;
   error = this.authService.error;
 
+  ngOnInit(): void {
+    console.log(this.authService.isConnected());
+    if (this.authService.isConnected()) {
+      this.router.navigateByUrl('/catalog');
+    }
+  }
+
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
@@ -36,18 +47,16 @@ export class Login {
       },
       error: (error: HttpErrorResponse) => {
         console.error('Login failed', error);
-      }
+      },
     });
   }
 
   togglePassword() {
-    this.showPassword.update(v => !v);
+    this.showPassword.update((v) => !v);
   }
 
   toggleDarkMode() {
     const element = document.querySelector('html');
     element!.classList.toggle('my-app-dark');
   }
-
-
 }
