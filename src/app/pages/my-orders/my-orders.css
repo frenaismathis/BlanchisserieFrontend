@@ -1,0 +1,13 @@
+.orders-container {
+  margin: 2rem auto;
+  max-width: 900px;
+}
+
+.p-table {
+  width: 100%;
+}
+
+ul {
+  margin: 0;
+  padding-left: 1rem;
+}

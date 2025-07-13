@@ -3,7 +3,8 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'app-order-modal',
   templateUrl: './order-modal.html',
-  styleUrl: './order-modal.css'
+  styleUrl: './order-modal.css',
+  standalone: true,
 })
 export class OrderModal {
   @Input() order: any;

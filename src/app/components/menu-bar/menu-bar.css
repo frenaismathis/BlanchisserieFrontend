@@ -1,0 +1,11 @@
+.p-menubar .p-menubar-end{
+    display: none;
+}
+
+.p-menubar-submenu{
+    right: 28px;
+}
+
+.p-menubar-submenu-icon {
+   display:none;
+}
