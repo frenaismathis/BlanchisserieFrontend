@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable, signal } from '@angular/core';
 import { Article } from '../models/article';
-import { ClientOrderArticle } from '../models/clientOrderArticle';
+import { ClientOrderArticle } from '../models/client-order-article';
 
 @Injectable({
   providedIn: 'root',

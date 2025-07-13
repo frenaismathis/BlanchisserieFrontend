@@ -1,7 +1,10 @@
 import { CurrencyPipe } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { TableModule } from 'primeng/table';
-import { ClientOrder } from '../../models/clientOrder';
+import { ClientOrder } from '../../models/client-order';
+import { OrderService } from '../../services/order';
+import { AuthService } from '../../services/auth';
+import { OrderStatus } from '../../models/order-status';
 
 @Component({
   selector: 'app-my-orders',
@@ -9,34 +12,29 @@ import { ClientOrder } from '../../models/clientOrder';
   templateUrl: './my-orders.html',
   styleUrl: './my-orders.css',
 })
-export class MyOrders {
-  orders: ClientOrder[] = [];
-  loading = true;
+  export class MyOrders implements OnInit {
+    orderStatus = OrderStatus;
+    private _orders = signal<ClientOrder[]>([]);
+    orders = this._orders.asReadonly();
+    loading = true;
+    private orderService = inject(OrderService);
+    private authService = inject(AuthService);
 
-  ngOnInit() {
-    // Remplace par un vrai service de récupération des commandes utilisateur
-    // Ici, on suppose que l'utilisateur est déjà authentifié
-    // TODO: Remplacer par un appel à OrderService
-    this.loading = false;
-    // Exemple de données mock
-    /*this.orders = [
-      {
-        id: 1,
-        userId: 1,
-        clientOrderArticles: [
-          { clientOrderId: 1, articleId: 2, quantity: 3 },
-          { clientOrderId: 1, articleId: 5, quantity: 1 },
-        ],
-        totalPrice: 40,
-        status: 'En cours',
-      },
-      {
-        id: 2,
-        userId: 1,
-        clientOrderArticles: [{ clientOrderId: 2, articleId: 1, quantity: 2 }],
-        totalPrice: 20,
-        status: 'Validée',
-      },
-    ];*/
-  }
+    ngOnInit() {
+      const user = this.authService.currentUser();
+      if (user) {
+        this.orderService.getClientOrdersByUserId(user.id).subscribe({
+          next: (orders: ClientOrder[]) => {
+            console.log('Fetched orders:', orders);
+            this._orders.set(orders);
+            this.loading = false;
+          },
+          error: () => {
+            this.loading = false;
+          }
+        });
+      } else {
+        this.loading = false;
+      }
+    }
 }

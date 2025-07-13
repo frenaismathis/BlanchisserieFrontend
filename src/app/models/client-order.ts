@@ -1,4 +1,4 @@
-import { ClientOrderArticle } from "./clientOrderArticle";
+import { ClientOrderArticle } from "./client-order-article";
 
 export interface ClientOrder {
   id?: number;

@@ -1,17 +1,21 @@
 <div class="orders-container">
-  <p-table [value]="orders" [loading]="loading" tableStyleClass="p-datatable-sm">
+  <p-table [value]="orders()" [loading]="loading" tableStyleClass="p-datatable-sm">
     <ng-template pTemplate="header">
       <tr>
         <th>ID</th>
-        <th>Total</th>
+        <th>Prix total</th>
         <th>Statut</th>
+        <th>Motif</th>
+        <th>Commentaire</th>
       </tr>
     </ng-template>
     <ng-template pTemplate="body" let-order>
       <tr>
         <td>{{ order.id }}</td>
         <td>{{ order.totalPrice | currency:'EUR' }}</td>
-        <td>{{ order.status }}</td>
+        <td>{{ orderStatus[order.status] || order.status }}</td>
+        <td>{{ order.motif }}</td>
+        <td>{{ order.commentary }}</td>
       </tr>
     </ng-template>
   </p-table>
