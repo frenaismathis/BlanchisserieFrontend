@@ -5,7 +5,7 @@ import { CurrencyPipe } from '@angular/common';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { CartService } from '../../services/cart';
-import { ClientOrderArticle } from '../../models/clientOrderArticle';
+import { ClientOrderArticle } from '../../models/client-order-article';
 
 @Component({
   selector: 'app-catalog',
