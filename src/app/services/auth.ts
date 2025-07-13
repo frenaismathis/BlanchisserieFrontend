@@ -27,7 +27,7 @@ export class AuthService {
       })
       .pipe(
         tap({
-          next: (user) => {
+          next: (user: User) => {
             this._currentUser.set(user);
           },
           error: () => {
@@ -47,7 +47,7 @@ export class AuthService {
       )
       .pipe(
         tap({
-          next: (user) => {
+          next: (user: User) => {
             // Les deux tokens sont automatiquement stockés dans des cookies HTTP-only
             // Nous mettons à jour l'état de l'utilisateur connecté
             this._currentUser.set(user);

@@ -1,11 +1,11 @@
+import { ClientOrderArticle } from "./clientOrderArticle";
+
 export interface ClientOrder {
-  id: number;
+  id?: number;
   userId: number;
-  clientOrderArticles: {
-    clientOrderId: number;
-    articleId: number;
-    quantity: number;
-  }[];
   totalPrice: number;
-  status: string;
+  status?: string;
+  motif?: string;
+  commentary?: string;
+  clientOrderArticles: ClientOrderArticle[];
 }

@@ -6,7 +6,7 @@
       <label for="email">Email</label>
     </p-floatlabel>
     <p-floatlabel variant="in" class="inline-flex my-2">
-      <input pInputText [type]="showPassword() ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" required autocomplete="current-password" />
+      <input pInputText [type]="showPassword() ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" required />
       <label for="email">Mot de passe</label>
     </p-floatlabel>
     <p-button type="submit" label="Se connecter" [disabled]="loading()"/>

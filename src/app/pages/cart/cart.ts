@@ -4,19 +4,43 @@ import { CardModule } from 'primeng/card';
 import { CartService } from '../../services/cart';
 import { CurrencyPipe } from '@angular/common';
 import { Article } from '../../models/article';
+import { OrderService } from '../../services/order';
+import { InputTextModule } from 'primeng/inputtext';
+import { FloatLabelModule } from 'primeng/floatlabel';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.html',
   styleUrl: './cart.css',
   standalone: true,
-  imports: [CardModule, ButtonModule, CurrencyPipe],
+  imports: [
+    CardModule, 
+    ButtonModule, 
+    CurrencyPipe, 
+    InputTextModule,
+    FloatLabelModule,
+    FormsModule
+  ]
 })
-export class Cart{
-
+export class Cart {
   private cartService = inject(CartService);
+  private orderService = inject(OrderService);
 
   readonly clientOrderArticles = this.cartService.currentClientOrderArticles;
+
+  motif = undefined;
+  commentary = undefined;
+
+  get totalPrice() {
+    return this.cartService.getTotalPrice();
+  }
+
+  createClientOrder() {
+    this.orderService.createClientOrder(this.motif, this.commentary).subscribe(() => {
+      this.cartService.clearCart();
+    });
+  }
 
   increment(article: Article) {
     this.cartService.increment(article);
@@ -29,5 +53,4 @@ export class Cart{
   deleteArticle(articleId: number) {
     this.cartService.deleteArticle(articleId);
   }
-
 }

@@ -22,14 +22,14 @@ export class MenuBar {
   ngOnInit() {
     this.items = [
       {
-        label: 'Articles',
-        icon: 'pi pi-shopping-bag',
-        routerLink: '/catalog',
-      },
-      {
         label: 'Mes commandes',
         icon: 'pi pi-truck',
         routerLink: '/my-orders',
+      },
+      {
+        label: 'Articles',
+        icon: 'pi pi-shopping-bag',
+        routerLink: '/catalog',
       },
       {
         icon: 'pi pi-shopping-cart',
@@ -44,7 +44,7 @@ export class MenuBar {
             this.router.navigateByUrl('/login');
           });
         },
-      },
+      }
     ];
   }
 

@@ -19,7 +19,7 @@ export class MyOrders {
     // TODO: Remplacer par un appel à OrderService
     this.loading = false;
     // Exemple de données mock
-    this.orders = [
+    /*this.orders = [
       {
         id: 1,
         userId: 1,
@@ -37,6 +37,6 @@ export class MyOrders {
         totalPrice: 20,
         status: 'Validée',
       },
-    ];
+    ];*/
   }
 }
