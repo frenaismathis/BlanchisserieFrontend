@@ -6,9 +6,8 @@ import { firstValueFrom } from 'rxjs';
 export const authGuard: CanActivateFn = async (route, state) => {
   const auth = inject(AuthService);
   const router = inject(Router);
-  // Si l'utilisateur n'est pas connu, tente de le restaurer côté serveur (synchrone ici, mais à adapter si besoin)
+
   if (!auth.currentUser()) {
-    // Attend la restauration de session si nécessaire
     try {
       await firstValueFrom(auth.checkAuth());
     } catch {}
@@ -18,13 +17,13 @@ export const authGuard: CanActivateFn = async (route, state) => {
   }
   const expectedRole = route.data['role'];
   const currentUser = auth.currentUser();
+  
   if (
     expectedRole &&
-    (!currentUser ||
-      !currentUser.role ||
-      currentUser.role.name !== expectedRole)
+    (!currentUser || currentUser.role.name !== expectedRole)
   ) {
     return router.createUrlTree(['/login']);
   }
+
   return true;
 };

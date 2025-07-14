@@ -1,22 +1,27 @@
-<p-button label="Toggle Dark Mode" (onClick)="toggleDarkMode()"/>
-<p-card header="Connexion" class="col-3 text-center">
-  <form (ngSubmit)="onSubmit()" class="flex flex-column align-items-center">
-    <p-floatlabel variant="in" class="inline-flex mt-2">
-      <input id="email" pInputText [(ngModel)]="email" name="email" required autocomplete="email"/>
-      <label for="email">Email</label>
-    </p-floatlabel>
-    <p-floatlabel variant="in" class="inline-flex my-2">
-      <input pInputText [type]="showPassword() ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" required />
-      <label for="email">Mot de passe</label>
-    </p-floatlabel>
-    <p-button type="submit" label="Se connecter" [disabled]="loading()"/>
-    @if(loading()){
-      <div class="p-mt-3" style="text-align:center;">
-        <i class="pi pi-spin pi-spinner" style="font-size:2rem;"></i>
-      </div>
-    }
-    @if(error()){
-      <div class="error">{{ error() }}</div>
-    }
-  </form>
-</p-card>
+<div class="flex justify-content-center align-items-center h-screen">
+    <p-card class="col-3 text-center">
+        <div class="flex justify-content-center">
+            <img src="/logo.png" width="75" height="75" alt="Logo" class="block" />
+        </div>
+        <p class="text-lg">Connectez-vous à votre compte</p>
+        <form (ngSubmit)="onSubmit()" class="flex flex-column align-items-center">
+            <p-floatlabel variant="in" class="inline-flex mt-4">
+            <input id="email" pInputText [(ngModel)]="email" name="email" required autocomplete="email"/>
+            <label for="email">Email</label>
+            </p-floatlabel>
+            <p-floatlabel variant="in" class="inline-flex my-4">
+            <input pInputText [type]="showPassword() ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" required />
+            <label for="email">Mot de passe</label>
+            </p-floatlabel>
+            <p-button type="submit" label="Se connecter" [disabled]="loading()"/>
+            @if(loading()){
+            <div class="p-mt-3" style="text-align:center;">
+                <i class="pi pi-spin pi-spinner" style="font-size:2rem;"></i>
+            </div>
+            }
+            @if(error()){
+            <div class="error">{{ error() }}</div>
+            }
+        </form>
+    </p-card>
+</div>
