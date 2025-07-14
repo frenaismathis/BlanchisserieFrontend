@@ -18,12 +18,19 @@ export class MenuBar {
   private authService = inject(AuthService);
 
   constructor(private router: Router) {}
-
+ 
   ngOnInit() {
+    console.log(this.authService.currentUser())
     this.items = [
+    {
+        label: 'Gérer les commandes utilisateurs',
+        icon: 'pi pi-wrench',
+        routerLink: '/admin/orders',
+        visible: this.authService.isAdmin(),
+      },
       {
         label: 'Mes commandes',
-        icon: 'pi pi-truck',
+        icon: 'pi pi-receipt',
         routerLink: '/my-orders',
       },
       {

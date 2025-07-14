@@ -1,31 +1,38 @@
-<div class="grid grid-nogutter mt-3 mb-3 align-items-start">
-    @if(!clientOrderArticles() || clientOrderArticles().length == 0) {
-        <div class="col-12" style="text-align:center;">Votre panier est vide.</div>
-    }
-    @else{
-        <p-card class="cart-list-articles col-6 col-offset-1">
-            @for(clientOrderArticle of clientOrderArticles(); track clientOrderArticle.articleId) {
-                <div class="grid grid-nogutter mb-2 border-bottom-1 border-gray-300 p-3">
-                    <div class="col-3">
-                        <img src="/logo.png" width="75" height="75" alt="Logo" class="block" />
-                    </div>
-                    <div class="col-9">
-                        <div class="flex justify-content-between">
-                            <span>{{ clientOrderArticle.article.name }}</span>
-                            <p-button label="Supprimer l'article" (onClick)="deleteArticle(clientOrderArticle.article.id)"/>
-                        </div>
-                        <span>{{ clientOrderArticle.article.description }}</span>
-                        <div class="flex align-items-center gap-2 justify-content-end">
-                            <span>{{ clientOrderArticle.article.price * clientOrderArticle.quantity | currency:'EUR' }}</span>
-                            <div class="inline-flex align-items-center gap-1">
-                                <p-button label="-" (onClick)="decrement(clientOrderArticle.article)" />
-                                <span>{{ clientOrderArticle.quantity }}</span>
-                                <p-button label="+" (onClick)="increment(clientOrderArticle.article)" />
+@if(!clientOrderArticles() || clientOrderArticles().length == 0) {
+    <div class="col-12" style="text-align:center;">Votre panier est vide.</div>
+}
+@else{
+    <div class="grid grid-nogutter mt-3 mb-3 align-items-start">
+        <p-card class="card col-6 col-offset-1">
+            <p-dataview #dv [value]="clientOrderArticles()">
+                <ng-template #list let-clientOrderArticles>
+                    @for(clientOrderArticle of clientOrderArticles; let first = $first; track clientOrderArticle.articleId) {
+                        <div class="grid grid-nogutter mb-2 p-3" 
+                                [class.border-top-1]="!first"
+                                [class.surface-border]="!first"
+                                [class.dark\:border-surface-700]="!first">
+                            <div class="col-3">
+                                <img src="/logo.png" width="75" height="75" alt="Logo" class="block" />
+                            </div>
+                            <div class="col-9">
+                                <div class="flex justify-content-between">
+                                    <span>{{ clientOrderArticle.article.name }}</span>
+                                    <p-button label="Supprimer l'article" (onClick)="deleteArticle(clientOrderArticle.article.id)"/>
+                                </div>
+                                <span>{{ clientOrderArticle.article.description }}</span>
+                                <div class="flex align-items-center gap-2 justify-content-end">
+                                    <span>{{ clientOrderArticle.article.price * clientOrderArticle.quantity | currency:'EUR' }}</span>
+                                    <div class="inline-flex align-items-center gap-1">
+                                        <p-button label="-" (onClick)="decrement(clientOrderArticle.article)" />
+                                        <span>{{ clientOrderArticle.quantity }}</span>
+                                        <p-button label="+" (onClick)="increment(clientOrderArticle.article)" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            }
+                    }
+                </ng-template>
+            </p-dataview> 
         </p-card>
         <div class="col-offset-1 col-3">
             <p-card header="Ajouter un motif et un commentaire à votre commande (facultatif)" class="text-center">
@@ -46,5 +53,5 @@
                 </div>
             </p-card>
         </div>
-    }
-</div>
+    </div>
+}

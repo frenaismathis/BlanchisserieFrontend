@@ -1,1 +1,45 @@
-<p>order-modal works!</p>
+<p-card>
+    @if(order){
+        <div class="mb-2 grid-nogutter grid pb-3 border-bottom-1 surface-border dark:border-surface-700">
+            <div class="col-5 flex flex-column">
+                <span>Numéro de commande : {{ order.id }} </span>
+                <span class="mt-3">Commande effectuée par : {{ order.username }} </span>
+            </div>
+            <div class="col-offset-2 col-5 flex flex-column align-items-end">
+                <span>Prix total : {{ order.totalPrice | currency:'EUR' }} </span>
+                <span class="mt-3">Statut : {{ order.status !== undefined ? orderStatus[order.status] : order.status }} </span>
+            </div>
+            @if(order.motif || order.commentary){
+                <div class="col-12">
+                    @if(order.motif){
+                        <p>Motif : {{ order.motif }} </p>
+                    }
+                    @if(order.commentary){
+                        <p>Commentaire : {{ order.commentary }} </p>
+                    }
+                </div>
+            }
+        </div>
+        @if(order.clientOrderArticles.length !== 0) {
+            <p class="pb-3 text-lg border-bottom-1 surface-border dark:border-surface-700">Liste des articles</p>
+            <p-dataview #dv [value]="order.clientOrderArticles">
+                <ng-template #list let-clientOrderArticles>
+                    @for(clientOrderArticle of clientOrderArticles; let first = $first; track clientOrderArticle.articleId) {
+                        <div [class.border-top-1]="!first"
+                            [class.surface-border]="!first"
+                            [class.dark\:border-surface-700]="!first"
+                        >
+                            <p>Nom de l'article : {{clientOrderArticle.article.name}}</p>
+                            <p>Prix unitaire de l'article : {{clientOrderArticle.article.price | currency:'EUR'}}</p>
+                            <p>Quantité : {{clientOrderArticle.quantity}}</p>
+                            <p>Prix total : {{ clientOrderArticle.article.price * clientOrderArticle.quantity | currency:'EUR' }}</p>
+                        </div>
+                    }
+                </ng-template>
+            </p-dataview>
+        }
+        @else{
+            <div>Aucun article dans cette commande.</div>
+        }
+    }
+</p-card>

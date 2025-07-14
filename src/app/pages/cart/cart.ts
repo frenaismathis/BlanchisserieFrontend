@@ -8,6 +8,7 @@ import { OrderService } from '../../services/order';
 import { InputTextModule } from 'primeng/inputtext';
 import { FloatLabelModule } from 'primeng/floatlabel';
 import { FormsModule } from '@angular/forms';
+import { DataViewModule } from 'primeng/dataview';
 
 @Component({
   selector: 'app-cart',
@@ -20,7 +21,8 @@ import { FormsModule } from '@angular/forms';
     CurrencyPipe, 
     InputTextModule,
     FloatLabelModule,
-    FormsModule
+    FormsModule,
+    DataViewModule 
   ]
 })
 export class Cart {

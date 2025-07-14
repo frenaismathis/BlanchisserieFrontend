@@ -1,0 +1,28 @@
+<div class="orders-container">
+  <p-table [value]="orders()" [loading]="loading()" tableStyleClass="p-datatable-sm">
+    <ng-template pTemplate="header">
+      <tr>
+        <th class="text-center">#</th>
+        <th class="text-center">Utilisateur</th>
+        <th class="text-center">Prix total</th>
+        <th class="text-center">Statut</th>
+        <th class="text-center">Motif</th>
+        <th class="text-center">Commentaire</th>
+        <th class="text-center">Détails</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-order>
+        <tr>
+            <td class="text-center">{{ order.id }}</td>
+            <td class="text-center">{{ order.username }}</td>
+            <td class="text-center">{{ order.totalPrice | currency:'EUR' }}</td>
+            <td class="text-center">{{ orderStatus[order.status] || order.status }}</td>
+            <td class="text-center">{{ order.motif }}</td>
+            <td class="text-center">{{ order.commentary }}</td>
+            <td class="text-center">
+            <p-button icon="pi pi-eye" aria-label="Voir" (onClick)="openOrderDialog(order)" />
+            </td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>

@@ -19,6 +19,8 @@ export class OrderService {
         }
         const clientOrder: ClientOrder = {
             userId: connectedUser.id,
+            username: connectedUser.username,
+            status: 0,
             clientOrderArticles: this.cartService.currentClientOrderArticles(),
             totalPrice: this.cartService.getTotalPrice(),
             motif: motif,
@@ -29,5 +31,9 @@ export class OrderService {
 
     getClientOrdersByUserId(userId: number) {
         return this.http.get<ClientOrder[]>(`http://localhost:5150/api/clientOrders/user/${userId}`);
+    }
+
+    getClientOrders() {
+        return this.http.get<ClientOrder[]>(`http://localhost:5150/api/clientOrders`);
     }
 }

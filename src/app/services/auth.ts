@@ -1,4 +1,5 @@
 import { Injectable, inject, signal, computed } from '@angular/core';
+import { RoleEnum } from '../models/role';
 import { HttpClient } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { User } from '../models/user';
@@ -11,15 +12,18 @@ export class AuthService {
   private _currentUser = signal<User | null>(null);
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
-
-  // Loading state for login
+  isAdmin = computed(() => {
+    console.log(this.currentUser()?.role.name);
+    console.log(RoleEnum.Admin);
+    console.log(this.currentUser()?.role.name === RoleEnum.Admin);
+    return this.currentUser()?.role.name === RoleEnum.Admin
+  });
   private _loading = signal(false);
   loading = this._loading.asReadonly();
 
   private _error = signal('');
   error = this._error.asReadonly();
 
-  // Vérifie l'utilisateur courant côté serveur (appelée au démarrage de l'app)
   checkAuth(): Observable<User | null> {
     return this.http
       .get<User>('http://localhost:5150/api/auth/me', {
@@ -87,7 +91,6 @@ export class AuthService {
       )
       .pipe(
         tap(() => {
-          // Le backend devrait supprimer les cookies
           this._currentUser.set(null);
         }),
       );

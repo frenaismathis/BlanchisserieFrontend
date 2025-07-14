@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { RoleEnum } from './models/role';
 import { Login } from './pages/login/login';
 import { Catalog } from './pages/catalog/catalog';
 import { Cart } from './pages/cart/cart';
@@ -11,12 +12,7 @@ export const routes: Routes = [
   { path: 'catalog', component: Catalog, canActivate: [authGuard] },
   { path: 'cart', component: Cart, canActivate: [authGuard] },
   { path: 'my-orders', component: MyOrders, canActivate: [authGuard] },
-  {
-    path: 'admin/orders',
-    component: AdminOrders,
-    canActivate: [authGuard],
-    data: { role: 'Admin' },
-  },
+  { path: 'admin/orders', component: AdminOrders, canActivate: [authGuard], data: { role: RoleEnum.Admin } },
   { path: '', redirectTo: '/catalog', pathMatch: 'full' },
   { path: '**', redirectTo: '/catalog' },
 ];
