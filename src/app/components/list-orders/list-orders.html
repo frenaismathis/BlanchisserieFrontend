@@ -1,9 +1,18 @@
-<div class="orders-container">
-  <p-table [value]="orders()" [loading]="loading()" tableStyleClass="p-datatable-sm">
+<div class="grid grid-nogutter">
+  <p-table 
+    [value]="orders()" 
+    [loading]="loading()"
+    tableStyleClass="p-datatable-sm" 
+    [paginator]="true"
+    [rows]="5"
+    [rowsPerPageOptions]="[5, 10, 20]"
+    class="col-offset-2 col-8 mt-4"
+>
     <ng-template pTemplate="header">
       <tr>
         <th class="text-center">#</th>
         <th class="text-center">Utilisateur</th>
+        <th class="text-center">Date</th>
         <th class="text-center">Prix total</th>
         <th class="text-center">Statut</th>
         <th class="text-center">Motif</th>
@@ -15,8 +24,9 @@
         <tr>
             <td class="text-center">{{ order.id }}</td>
             <td class="text-center">{{ order.username }}</td>
+            <td class="text-center">{{ order.orderDate | date:'dd/MM/yyyy' }}</td>
             <td class="text-center">{{ order.totalPrice | currency:'EUR' }}</td>
-            <td class="text-center">{{ orderStatus[order.status] || order.status }}</td>
+            <td class="text-center">{{ orderStatusLabel[orderStatus[order.status]] || order.status }}</td>
             <td class="text-center">{{ order.motif }}</td>
             <td class="text-center">{{ order.commentary }}</td>
             <td class="text-center">

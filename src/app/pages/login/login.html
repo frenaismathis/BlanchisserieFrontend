@@ -6,21 +6,21 @@
         <p class="text-lg">Connectez-vous à votre compte</p>
         <form (ngSubmit)="onSubmit()" class="flex flex-column align-items-center">
             <p-floatlabel variant="in" class="inline-flex mt-4">
-            <input id="email" pInputText [(ngModel)]="email" name="email" required autocomplete="email"/>
-            <label for="email">Email</label>
+                <input id="email" pInputText [(ngModel)]="email" name="email" required autocomplete="email"/>
+                <label for="email">Email</label>
             </p-floatlabel>
             <p-floatlabel variant="in" class="inline-flex my-4">
-            <input pInputText [type]="showPassword() ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" required />
-            <label for="email">Mot de passe</label>
+                <input pInputText [type]="showPassword() ? 'text' : 'password'" id="password" [(ngModel)]="password" name="password" required />
+                <label for="email">Mot de passe</label>
             </p-floatlabel>
             <p-button type="submit" label="Se connecter" [disabled]="loading()"/>
             @if(loading()){
-            <div class="p-mt-3" style="text-align:center;">
-                <i class="pi pi-spin pi-spinner" style="font-size:2rem;"></i>
-            </div>
+                <div class="p-mt-3" style="text-align:center;">
+                    <i class="pi pi-spin pi-spinner" style="font-size:2rem;"></i>
+                </div>
             }
-            @if(error()){
-            <div class="error">{{ error() }}</div>
+            @if(error() && error()?.status === 401){
+                <p class="text-red-400">Adresse email ou mot de passe incorrect</p>
             }
         </form>
     </p-card>

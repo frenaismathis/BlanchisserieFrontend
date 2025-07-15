@@ -35,7 +35,6 @@ export const appConfig: ApplicationConfig = {
     provideAppInitializer(async () => {
       const authService = inject(AuthService);
       try {
-        // firstValueFrom => convert an Observable to a Promise
         await firstValueFrom(authService.checkAuth());
       } catch {}
     }),

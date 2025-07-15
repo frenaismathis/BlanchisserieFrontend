@@ -13,15 +13,12 @@ export class AuthService {
   currentUser = this._currentUser.asReadonly();
   isConnected = computed(() => this.currentUser() !== null);
   isAdmin = computed(() => {
-    console.log(this.currentUser()?.role.name);
-    console.log(RoleEnum.Admin);
-    console.log(this.currentUser()?.role.name === RoleEnum.Admin);
     return this.currentUser()?.role.name === RoleEnum.Admin
   });
   private _loading = signal(false);
   loading = this._loading.asReadonly();
 
-  private _error = signal('');
+  private _error = signal<{ status?: number; } | null>(null);
   error = this._error.asReadonly();
 
   checkAuth(): Observable<User | null> {
@@ -52,32 +49,14 @@ export class AuthService {
       .pipe(
         tap({
           next: (user: User) => {
-            // Les deux tokens sont automatiquement stockés dans des cookies HTTP-only
-            // Nous mettons à jour l'état de l'utilisateur connecté
+            // Tokens are automatically stored in HTTP-only cookies
             this._currentUser.set(user);
             this._loading.set(false);
-            console.log(user);
           },
           error: (error) => {
             this._loading.set(false);
-            this._error.set(error.message);
+            this._error.set(error);
           },
-        }),
-      );
-  }
-
-  // Méthode pour rafraîchir les tokens. Utilisée par l'intercepteur HTTP
-  revokeToken(): Observable<any> {
-    return this.http
-      .post<any>(
-        'http://localhost:5150/api/auth/revoke-token',
-        {},
-        { withCredentials: true },
-      )
-      .pipe(
-        tap((response) => {
-          // Les nouveaux tokens sont automatiquement stockés dans des cookies HTTP-only
-          console.log('Tokens refreshed successfully');
         }),
       );
   }

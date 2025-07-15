@@ -16,11 +16,14 @@ import { AuthService } from '../../services/auth';
 export class MenuBar {
   items: MenuItem[] | undefined;
   private authService = inject(AuthService);
+  username: string | undefined;
 
   constructor(private router: Router) {}
  
   ngOnInit() {
-    console.log(this.authService.currentUser())
+    if(this.authService.currentUser()){
+        this.username = this.authService.currentUser()!.firstname + ' ' + this.authService.currentUser()!.lastname
+    }
     this.items = [
     {
         label: 'Gérer les commandes utilisateurs',

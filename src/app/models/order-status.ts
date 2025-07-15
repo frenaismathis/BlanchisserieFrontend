@@ -1,6 +1,6 @@
 export enum OrderStatus {
-  "Validation en cours" = 0,
-  "Validée" = 1,
-  "Rejetée" = 2,
-  "Livrée" = 3,
+  PendingValidation = 0,
+  Validated = 1,
+  Rejected = 2,
+  Delivered = 3
 }

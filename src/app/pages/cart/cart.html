@@ -1,8 +1,8 @@
 @if(!clientOrderArticles() || clientOrderArticles().length == 0) {
-    <div class="col-12" style="text-align:center;">Votre panier est vide.</div>
+    <div class="col-12 mt-4" style="text-align:center;">Votre panier est vide.</div>
 }
 @else{
-    <div class="grid grid-nogutter mt-3 mb-3 align-items-start">
+    <div class="grid grid-nogutter mt-4 mb-3 align-items-start">
         <p-card class="card col-6 col-offset-1">
             <p-dataview #dv [value]="clientOrderArticles()">
                 <ng-template #list let-clientOrderArticles>
@@ -12,14 +12,14 @@
                                 [class.surface-border]="!first"
                                 [class.dark\:border-surface-700]="!first">
                             <div class="col-3">
-                                <img src="/logo.png" width="75" height="75" alt="Logo" class="block" />
+                                <img src="http://localhost:5150/{{clientOrderArticle.article.imagePath}}" width="75" height="75" class="block" />
                             </div>
                             <div class="col-9">
-                                <div class="flex justify-content-between">
+                                <div class="flex justify-content-between align-items-center mb-2">
                                     <span>{{ clientOrderArticle.article.name }}</span>
-                                    <p-button label="Supprimer l'article" (onClick)="deleteArticle(clientOrderArticle.article.id)"/>
+                                    <p-button class="text-sm p-1" label="Supprimer l'article" (onClick)="deleteArticle(clientOrderArticle.article.id)"/>
                                 </div>
-                                <span>{{ clientOrderArticle.article.description }}</span>
+                                <p>{{ clientOrderArticle.article.description }}</p>
                                 <div class="flex align-items-center gap-2 justify-content-end">
                                     <span>{{ clientOrderArticle.article.price * clientOrderArticle.quantity | currency:'EUR' }}</span>
                                     <div class="inline-flex align-items-center gap-1">

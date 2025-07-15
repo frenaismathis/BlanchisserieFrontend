@@ -34,8 +34,6 @@ export class MyOrders implements OnInit {
     } else {
       this._loading.set(false);
     }
-  }
-
-  
+  }  
 
 }

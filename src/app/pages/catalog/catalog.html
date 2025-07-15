@@ -11,7 +11,8 @@
         @for(article of articles(); track article.id) {
             <div class="col-12 md:col-4 lg:col-3 inline-flex">
                 <p-card class="col-12" header="{{ article.name }}">
-                    <p>Description : {{ article.description }}</p>
+                    <img src="http://localhost:5150/{{article.imagePath}}" width="75" height="75" class="block" />
+                    <p>{{ article.description }}</p>
                     <ng-template #footer>
                         <div class="mt-1 flex justify-content-between flex-wrap align-items-center">
                             <div>
