@@ -33,7 +33,6 @@ export class Login implements OnInit {
   error = this.authService.error;
 
   ngOnInit(): void {
-    console.log(this.authService.isConnected());
     if (this.authService.isConnected()) {
       this.router.navigateByUrl('/catalog');
     }
@@ -42,7 +41,6 @@ export class Login implements OnInit {
   onSubmit() {
     this.authService.login(this.email, this.password).subscribe({
       next: () => {
-        console.log('Logged in successfully');
         this.router.navigateByUrl('/catalog');
       },
       error: (error: HttpErrorResponse) => {

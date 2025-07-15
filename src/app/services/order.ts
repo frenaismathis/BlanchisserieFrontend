@@ -3,6 +3,7 @@ import { inject, Injectable } from '@angular/core';
 import { ClientOrder } from '../models/client-order';
 import { AuthService } from './auth';
 import { CartService } from './cart';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +20,7 @@ export class OrderService {
         }
         const clientOrder: ClientOrder = {
             userId: connectedUser.id,
-            username: connectedUser.username,
+            username: connectedUser.firstname + ' ' + connectedUser.lastname,
             status: 0,
             clientOrderArticles: this.cartService.currentClientOrderArticles(),
             totalPrice: this.cartService.getTotalPrice(),
@@ -35,5 +36,9 @@ export class OrderService {
 
     getClientOrders() {
         return this.http.get<ClientOrder[]>(`http://localhost:5150/api/clientOrders`);
+    }
+
+    updateOrderStatus(orderId: number, status: number): Observable<ClientOrder | null> {
+        return this.http.patch<ClientOrder>(`http://localhost:5150/api/clientOrders/${orderId}`, { status });
     }
 }

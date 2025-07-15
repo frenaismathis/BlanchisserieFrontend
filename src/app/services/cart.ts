@@ -57,7 +57,6 @@ export class CartService {
     } else if (delta > 0) {
       this.addArticle(article);
     }
-    console.log(this._clientOrderArticles());
   }
 
   deleteArticle(articleId: number) {
