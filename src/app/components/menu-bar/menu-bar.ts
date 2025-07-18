@@ -17,15 +17,24 @@ export class MenuBar {
   items: MenuItem[] | undefined;
   private authService = inject(AuthService);
   username: string | undefined;
+  isDarkMode = false;
 
   constructor(private router: Router) {}
- 
+
   ngOnInit() {
+    // Initialize dark mode from localStorage
+    this.isDarkMode = localStorage.getItem('darkMode') === 'true';
+    this.applyDarkModeClass();
+
     if(this.authService.currentUser()){
         this.username = this.authService.currentUser()!.firstname + ' ' + this.authService.currentUser()!.lastname
     }
+    this.setMenuItems();
+  }
+
+  setMenuItems() {
     this.items = [
-    {
+      {
         label: 'Gérer les commandes utilisateurs',
         icon: 'pi pi-wrench',
         routerLink: '/admin/orders',
@@ -47,6 +56,12 @@ export class MenuBar {
         routerLink: '/cart',
       },
       {
+        icon: this.isDarkMode ? 'pi pi-moon' : 'pi pi-sun',
+        command: () => {
+          this.toggleDarkMode();
+        },
+      },
+      {
         label: 'Déconnexion',
         icon: 'pi pi-power-off',
         command: () => {
@@ -59,7 +74,18 @@ export class MenuBar {
   }
 
   toggleDarkMode() {
+    this.isDarkMode = !this.isDarkMode;
+    localStorage.setItem('darkMode', this.isDarkMode ? 'true' : 'false');
+    this.applyDarkModeClass();
+    this.setMenuItems();
+  }
+
+  applyDarkModeClass() {
     const element = document.querySelector('html');
-    element!.classList.toggle('my-app-dark');
+    if (this.isDarkMode) {
+      element?.classList.add('my-app-dark');
+    } else {
+      element?.classList.remove('my-app-dark');
+    }
   }
 }
