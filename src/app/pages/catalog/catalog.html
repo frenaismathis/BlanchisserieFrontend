@@ -21,10 +21,10 @@
                             <div class="flex gap-3 flex-wrap align-items-center">
                               @let clientOrderArticle = getClientOrderArticleFromArticleId(article.id);
                               @if(clientOrderArticle && clientOrderArticle.quantity > 0) {
-                                <p-button label="-" (onClick)="decrement(article)" />
+                                <p-button label="-" severity="secondary" (onClick)="decrement(article)" />
                                 <span>{{ clientOrderArticle.quantity }}</span>
                               }
-                              <p-button label="+" (onClick)="increment(article)" />
+                              <p-button label="+" severity="primary" (onClick)="increment(article)" />
                             </div>
                         </div>
                     </ng-template>

@@ -28,7 +28,6 @@ export class Login implements OnInit {
   private authService = inject(AuthService);
   private router = inject(Router);
 
-  // Expose loading state from AuthService
   loading = this.authService.loading;
   error = this.authService.error;
 

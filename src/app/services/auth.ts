@@ -23,9 +23,7 @@ export class AuthService {
 
   checkAuth(): Observable<User | null> {
     return this.http
-      .get<User>('http://localhost:5150/api/auth/me', {
-        withCredentials: true,
-      })
+      .get<User>('http://localhost:5150/api/auth/me')
       .pipe(
         tap({
           next: (user: User) => {
@@ -43,8 +41,7 @@ export class AuthService {
     return this.http
       .post<User>(
         'http://localhost:5150/api/auth/login',
-        { email, password },
-        { withCredentials: true },
+        { email, password }
       )
       .pipe(
         tap({
@@ -63,11 +60,7 @@ export class AuthService {
 
   logout(): Observable<any> {
     return this.http
-      .post<any>(
-        'http://localhost:5150/api/auth/logout',
-        {},
-        { withCredentials: true },
-      )
+      .post<any>('http://localhost:5150/api/auth/logout', {})
       .pipe(
         tap(() => {
           this._currentUser.set(null);

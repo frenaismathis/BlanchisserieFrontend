@@ -11,9 +11,9 @@ import { providePrimeNG } from 'primeng/config';
 import { routes } from './app.routes';
 import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { credentialsInterceptor } from './services/credentials-interceptor';
-import customPreset from './mypreset';
 import { AuthService } from './services/auth';
 import { firstValueFrom } from 'rxjs';
+import Aura from '@primeuix/themes/aura';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -24,7 +24,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     providePrimeNG({
       theme: {
-        preset: customPreset,
+        preset: Aura,
         options: {
           prefix: 'p',
           darkModeSelector: '.my-app-dark',

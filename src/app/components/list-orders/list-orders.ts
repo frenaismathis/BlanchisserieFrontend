@@ -1,5 +1,4 @@
-import { Component, effect, inject, input, InputSignal, model, ModelSignal, Signal, signal, WritableSignal } from '@angular/core';
-import { Output, EventEmitter } from '@angular/core';
+import { Component, Signal, WritableSignal } from '@angular/core';
 import { Input } from '@angular/core';
 import { TableModule } from 'primeng/table';
 import { CurrencyPipe, DatePipe } from '@angular/common';
@@ -19,10 +18,6 @@ import { OrderStatusLabel } from '../../models/order-status-label';
   providers: [DialogService]
 })
 export class ListOrders {
-  @Input() page!: number;
-  @Input() totalCount!: number;
-  @Input() pageSize!: number;
-  @Output() pageChange = new EventEmitter<number>();
   @Input() orders!: Signal<ClientOrder[]>;
   @Input() orderUpdated!: WritableSignal<ClientOrder | null>;
   @Input() loading!: Signal<boolean>;

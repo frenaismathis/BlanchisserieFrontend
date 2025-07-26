@@ -1,7 +1,7 @@
 @if(authService.isAdmin() && isAdminOrderPage) {
     <div class="flex justify-content-end gap-2 mb-3">
-        <p-button label="Valider" (onClick)="validate()" />
-        <p-button label="Refuser" severity="danger" (onClick)="refuse()" />
+        <p-button label="Valider" severity="primary" (onClick)="validate()" />
+        <p-button label="Refuser" severity="secondary" (onClick)="refuse()" />
     </div>
 }
 <p-card>
